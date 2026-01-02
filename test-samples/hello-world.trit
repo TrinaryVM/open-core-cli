@@ -1,0 +1,19 @@
+// TritLang Hello World Example
+// This demonstrates basic arithmetic in balanced ternary
+
+contract HelloWorld {
+    trit9 value;
+    
+    function main() public {
+        // Initialize with a magic number
+        value = 42;
+        
+        // Double the value using ternary arithmetic
+        value = value + value; // Should result in 84
+        
+        // Emit the result
+        emit ValueComputed(value);
+    }
+    
+    event ValueComputed(trit9 result);
+} 

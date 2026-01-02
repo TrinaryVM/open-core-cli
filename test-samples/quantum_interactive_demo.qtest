@@ -1,0 +1,120 @@
+# Interactive Quantum Programming Demo
+# TrinaryVM Quantum Interface - Interactive Demo
+# Run with: ./target/debug/quantum_terminal < quantum_interactive_demo.qtest
+
+# Demo 1: Single Qutrit Cycle - Demonstrate X gate behavior
+create register cycle_demo 1
+probabilities cycle_demo
+
+create circuit x_gate 1
+add gate x_gate X 0
+
+# Apply X gate three times to complete cycle |0⟩ → |1⟩ → |2⟩ → |0⟩
+execute x_gate cycle_demo
+probabilities cycle_demo
+
+execute x_gate cycle_demo
+probabilities cycle_demo
+
+execute x_gate cycle_demo
+probabilities cycle_demo
+
+# Demo 2: Quantum Superposition - Perfect equal distribution
+create register superposition_demo 1
+create circuit hadamard 1
+add gate hadamard H 0
+
+execute hadamard superposition_demo
+probabilities superposition_demo
+
+# Measure to see state collapse
+measure superposition_demo 0
+probabilities superposition_demo
+
+# Demo 3: Quantum Entanglement - Bell state creation
+create register bell_state 2
+create circuit bell_circuit 2
+
+add gate bell_circuit H 0
+add gate bell_circuit CX 0 1
+
+execute bell_circuit bell_state
+probabilities bell_state
+
+# Measure first qutrit to see entanglement
+measure bell_state 0
+probabilities bell_state
+
+# Demo 4: Phase Manipulation with Z gate
+create register phase_demo 1
+create circuit phase_circuit 1
+
+# First create superposition
+add gate phase_circuit H 0
+execute phase_circuit phase_demo
+probabilities phase_demo
+
+# Apply Z gate for phase shift
+add gate phase_circuit Z 0
+execute phase_circuit phase_demo
+probabilities phase_demo
+
+# Demo 5: Multi-Qutrit Complex Circuit
+create register tri_system 3
+create circuit complex_demo 3
+
+# Layer 1: Create superposition on all qutrits
+add gate complex_demo H 0
+add gate complex_demo H 1
+add gate complex_demo H 2
+
+execute complex_demo tri_system
+probabilities tri_system
+
+# Layer 2: Add entanglement
+add gate complex_demo CX 0 1
+add gate complex_demo CX 1 2
+
+execute complex_demo tri_system
+probabilities tri_system
+
+# Demo 6: Parameterized Rotations
+create register rotation_demo 1
+create circuit param_rotation 1
+
+# π/6 rotation
+add gate param_rotation U(0.523599,0,0) 0
+execute param_rotation rotation_demo
+probabilities rotation_demo
+
+# π/3 rotation  
+add gate param_rotation U(1.047198,0,0) 0
+execute param_rotation rotation_demo
+probabilities rotation_demo
+
+# Demo 7: Grover Search Performance Test
+grover 3 0
+grover 3 1
+grover 3 2
+
+grover 9 0
+grover 9 4
+grover 9 8
+
+grover 27 0
+grover 27 13
+grover 27 26
+
+# Demo 8: System Resource Monitoring
+status
+list registers
+list circuits
+
+# Comprehensive measurement of all systems
+measure tri_system
+measure rotation_demo
+measure bell_state
+
+status
+
+exit 

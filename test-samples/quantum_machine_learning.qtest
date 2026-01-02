@@ -1,0 +1,209 @@
+# Quantum Machine Learning for Ternary Classification
+# TrinaryVM Quantum Interface - QML Implementation
+# Run with: ./target/debug/quantum_terminal < quantum_machine_learning.qtest
+
+# QML Algorithm 1: Variational Quantum Classifier (VQC)
+# Classify ternary data patterns: 0, 1, 2 states
+
+# Feature encoding layer - encode classical data into quantum states
+create register feature_register 4
+create circuit feature_encoding 4
+
+# Encode ternary features [1,0,2,1] into quantum amplitudes
+add gate feature_encoding U(0.785398,0,0) 0    # Feature 1: state 1
+add gate feature_encoding I 1                  # Feature 2: state 0 
+add gate feature_encoding U(2.094395,0,0) 2    # Feature 3: state 2
+add gate feature_encoding U(0.785398,0,0) 3    # Feature 4: state 1
+
+execute feature_encoding feature_register
+probabilities feature_register
+
+# Variational layer 1 - trainable parameters
+create circuit variational_layer1 4
+add gate variational_layer1 U(1.23,0.45,0.67) 0
+add gate variational_layer1 U(2.34,1.56,0.89) 1
+add gate variational_layer1 U(0.12,2.78,1.90) 2
+add gate variational_layer1 U(1.45,0.33,2.11) 3
+
+# Entangling layer 1
+add gate variational_layer1 CX 0 1
+add gate variational_layer1 CX 1 2
+add gate variational_layer1 CX 2 3
+add gate variational_layer1 CX 3 0
+
+execute variational_layer1 feature_register
+probabilities feature_register
+
+# Variational layer 2 - deeper network
+create circuit variational_layer2 4
+add gate variational_layer2 U(0.67,1.23,2.45) 0
+add gate variational_layer2 U(1.89,0.78,1.34) 1
+add gate variational_layer2 U(2.56,1.90,0.45) 2
+add gate variational_layer2 U(0.34,2.67,1.12) 3
+
+# Ring entanglement pattern
+add gate variational_layer2 CZ 0 2
+add gate variational_layer2 CZ 1 3
+add gate variational_layer2 CX 0 3
+add gate variational_layer2 CX 1 2
+
+execute variational_layer2 feature_register
+probabilities feature_register
+
+# Measurement for classification (simulate 3-class output)
+measure feature_register 0    # Primary classification qubit
+measure feature_register 1    # Secondary classification qubit
+probabilities feature_register
+
+# QML Algorithm 2: Quantum Neural Network (QNN)
+create register qnn_input 3
+create register qnn_hidden 3
+create register qnn_output 2
+
+# Input layer preparation
+create circuit qnn_input_layer 3
+add gate qnn_input_layer H 0
+add gate qnn_input_layer U(0.52,1.04,1.57) 1
+add gate qnn_input_layer U(2.09,0.78,0.26) 2
+
+execute qnn_input_layer qnn_input
+probabilities qnn_input
+
+# Hidden layer with ternary activation
+create circuit qnn_hidden_layer 3
+add gate qnn_hidden_layer U(1.11,2.22,0.33) 0
+add gate qnn_hidden_layer U(0.44,1.55,2.66) 1
+add gate qnn_hidden_layer U(2.77,0.88,1.99) 2
+
+# Ternary non-linearity simulation
+add gate qnn_hidden_layer CX 0 1
+add gate qnn_hidden_layer CZ 1 2
+add gate qnn_hidden_layer CX 2 0
+
+execute qnn_hidden_layer qnn_input
+probabilities qnn_input
+
+# Output layer for binary classification
+create circuit qnn_output_layer 2
+add gate qnn_output_layer U(1.57,0,0) 0    # Output neuron 1
+add gate qnn_output_layer U(3.14,0,0) 1    # Output neuron 2
+add gate qnn_output_layer CX 0 1           # Output correlation
+
+execute qnn_output_layer qnn_output
+probabilities qnn_output
+
+# QML Algorithm 3: Quantum Support Vector Machine (QSVM)
+create register qsvm_features 4
+create register qsvm_kernel 4
+
+# Kernel feature map - RBF-like quantum kernel
+create circuit quantum_kernel 4
+add gate quantum_kernel H 0
+add gate quantum_kernel H 1
+add gate quantum_kernel H 2
+add gate quantum_kernel H 3
+
+# Parameterized feature map
+add gate quantum_kernel U(0.1,0.2,0.3) 0
+add gate quantum_kernel U(0.4,0.5,0.6) 1
+add gate quantum_kernel U(0.7,0.8,0.9) 2
+add gate quantum_kernel U(1.0,1.1,1.2) 3
+
+# Kernel interactions
+add gate quantum_kernel CZ 0 1
+add gate quantum_kernel CZ 1 2
+add gate quantum_kernel CZ 2 3
+add gate quantum_kernel CZ 3 0
+add gate quantum_kernel CX 0 2
+add gate quantum_kernel CX 1 3
+
+execute quantum_kernel qsvm_features
+probabilities qsvm_features
+
+# Quantum feature comparison (simplified)
+create circuit feature_comparison 4
+add gate feature_comparison U(2.0,1.5,1.0) 0
+add gate feature_comparison U(1.8,1.3,0.8) 1
+add gate feature_comparison U(1.6,1.1,0.6) 2
+add gate feature_comparison U(1.4,0.9,0.4) 3
+
+execute feature_comparison qsvm_features
+probabilities qsvm_features
+
+# QML Algorithm 4: Quantum Reinforcement Learning Agent
+create register q_agent_state 3
+create register q_agent_action 2
+
+# Q-learning state representation
+create circuit q_state_prep 3
+add gate q_state_prep U(0.5,1.0,1.5) 0    # State feature 1
+add gate q_state_prep U(1.2,0.8,0.4) 1    # State feature 2  
+add gate q_state_prep U(2.1,1.9,1.7) 2    # State feature 3
+
+execute q_state_prep q_agent_state
+probabilities q_agent_state
+
+# Policy network (action selection)
+create circuit q_policy 2
+add gate q_policy H 0                      # Action space exploration
+add gate q_policy U(1.33,0.67,2.0) 1      # Action preference
+
+# State-action entanglement
+add gate q_policy CX 0 1
+
+execute q_policy q_agent_action
+probabilities q_agent_action
+
+# Measure action selection
+measure q_agent_action 0
+measure q_agent_action 1
+probabilities q_agent_action
+
+# QML Algorithm 5: Quantum Generative Adversarial Network (QGAN)
+create register qgan_noise 3
+create register qgan_generated 3
+create register qgan_discriminator 2
+
+# Generator: Transform noise into data
+create circuit qgan_generator 3
+add gate qgan_generator H 0
+add gate qgan_generator H 1
+add gate qgan_generator H 2
+
+# Parameterized generation
+add gate qgan_generator U(0.9,1.8,2.7) 0
+add gate qgan_generator U(1.3,2.6,0.7) 1
+add gate qgan_generator U(2.2,0.4,1.1) 2
+
+# Generation correlations
+add gate qgan_generator CX 0 1
+add gate qgan_generator CZ 1 2
+add gate qgan_generator CX 2 0
+
+execute qgan_generator qgan_noise
+probabilities qgan_noise
+
+# Discriminator: Classify real vs generated
+create circuit qgan_discriminator 2
+add gate qgan_discriminator U(1.0,2.0,3.0) 0
+add gate qgan_discriminator U(0.5,1.5,2.5) 1
+add gate qgan_discriminator CZ 0 1
+
+execute qgan_discriminator qgan_discriminator
+probabilities qgan_discriminator
+
+# Performance analysis of QML algorithms
+status
+
+# Benchmark against classical algorithms (Grover as baseline)
+grover 81 27      # Search in equivalent classical space
+grover 243 81     # Larger search space
+
+# Final measurements for all QML models
+measure qgan_discriminator
+measure q_agent_state
+measure qsvm_features
+
+status
+
+exit 

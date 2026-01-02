@@ -1,0 +1,35 @@
+// TritLang Homomorphic Encryption Example
+// Demonstrates privacy-preserving computation
+
+import "trithomomorphic";
+
+contract HomomorphicDemo {
+    using trithomomorphic for trit27;
+    
+    trit9 secret_a;
+    trit9 secret_b;
+    trithomomorphic.EncryptedTrit27 encrypted_sum;
+    
+    function main() public {
+        // Initialize secret values
+        secret_a = 7;
+        secret_b = 3;
+        
+        // Generate encryption keys
+        var keyPair = trithomomorphic.generateKeys();
+        
+        // Encrypt the values
+        var enc_a = trithomomorphic.encrypt(secret_a, keyPair.publicKey);
+        var enc_b = trithomomorphic.encrypt(secret_b, keyPair.publicKey);
+        
+        // Perform homomorphic addition (7 + 3 = 10)
+        encrypted_sum = trithomomorphic.add(enc_a, enc_b);
+        
+        // The result remains encrypted - can only be decrypted with secret key
+        // This demonstrates computation on encrypted data without revealing inputs
+        
+        emit HomomorphicComputation(encrypted_sum);
+    }
+    
+    event HomomorphicComputation(trithomomorphic.EncryptedTrit27 result);
+} 

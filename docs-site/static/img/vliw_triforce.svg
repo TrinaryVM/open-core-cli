@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" style="background-color: #000000;">
+  <style>
+    @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 2px #b3b3b3); } 50% { filter: drop-shadow(0 0 6px #cccccc); } }
+    @keyframes dash { 0% { stroke-dashoffset: 30; } 100% { stroke-dashoffset: 0; } }
+    .sierpinski { stroke: #a6a6a6; stroke-width: 1.5; fill: none; }
+    .sub-triangle { stroke: #b3b3b3; stroke-width: 2; fill: #1a1a1a; animation: glow 2s ease-in-out infinite; }
+    .top { animation-delay: 0s; }
+    .left { animation-delay: 0.5s; }
+    .right { animation-delay: 1s; }
+    .arrow { stroke: #cccccc; stroke-width: 1.5; stroke-dasharray: 30; fill: none; animation: dash 1s linear infinite; }
+    .label { fill: #d9d9d9; font-size: 9px; font-family: 'Inter', sans-serif; }
+  </style>
+  <!-- Large outer -->
+  <polygon class="sierpinski" points="100,20 20,160 180,160"/>
+  <!-- Sub-triangle 1: Top with Instr 1 arrow -->
+  <polygon class="sub-triangle top" points="100,20 60,90 140,90"/>
+  <path class="arrow" d="M80,55 L120,55" style="animation-delay: 0s;"/>
+  <text class="label" x="100" y="75" text-anchor="middle">Instr 1</text>
+  <!-- Sub-triangle 2: Bottom-left with Instr 2 -->
+  <polygon class="sub-triangle left" points="20,160 60,90 40,125"/>
+  <path class="arrow" d="M30,110 L50,110" style="animation-delay: 0.3s;"/>
+  <text class="label" x="40" y="120" text-anchor="middle">Instr 2</text>
+  <!-- Sub-triangle 3: Bottom-right with Instr 3 -->
+  <polygon class="sub-triangle right" points="180,160 140,90 160,125"/>
+  <path class="arrow" d="M150,110 L170,110" style="animation-delay: 0.6s;"/>
+  <text class="label" x="160" y="120" text-anchor="middle">Instr 3</text>
+</svg>

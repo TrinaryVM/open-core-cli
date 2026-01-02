@@ -1,0 +1,95 @@
+# Quantum Basics Test Suite
+# TrinaryVM Quantum Interface Testing
+# Run with: ./target/debug/quantum_terminal < quantum_basics.qtest
+
+# Test 1: Basic Single Qutrit Operations
+echo "=== Test 1: Single Qutrit Operations ==="
+create register single_qutrit 1
+probabilities single_qutrit
+
+# Apply X gate (cyclic shift: |0⟩→|1⟩→|2⟩→|0⟩)
+create circuit x_circuit 1
+add gate x_circuit X 0
+execute x_circuit single_qutrit
+probabilities single_qutrit
+
+# Apply another X gate
+execute x_circuit single_qutrit
+probabilities single_qutrit
+
+# Apply third X gate (should return to |0⟩)
+execute x_circuit single_qutrit
+probabilities single_qutrit
+
+# Test 2: Superposition with Hadamard
+echo "=== Test 2: Quantum Superposition ==="
+create register superpos_qutrit 1
+create circuit h_circuit 1
+add gate h_circuit H 0
+execute h_circuit superpos_qutrit
+probabilities superpos_qutrit
+
+# Measure the superposition state
+measure superpos_qutrit 0
+
+# Test 3: Two-Qutrit Entanglement
+echo "=== Test 3: Quantum Entanglement ==="
+create register entangled_pair 2
+create circuit entangle_circuit 2
+
+# Create entanglement using Hadamard + Controlled-X
+add gate entangle_circuit H 0
+add gate entangle_circuit CX 0 1
+execute entangle_circuit entangled_pair
+probabilities entangled_pair
+
+# Measure first qutrit and see correlation
+measure entangled_pair 0
+probabilities entangled_pair
+
+# Test 4: Complex Multi-Gate Circuit
+echo "=== Test 4: Complex Circuit ==="
+create register complex_system 3
+create circuit complex_circuit 3
+
+# Build a complex circuit with multiple gates
+add gate complex_circuit H 0
+add gate complex_circuit H 1
+add gate complex_circuit CX 0 2
+add gate complex_circuit Z 1
+add gate complex_circuit CZ 1 2
+add gate complex_circuit H 2
+
+execute complex_circuit complex_system
+probabilities complex_system
+
+# Full system measurement
+measure complex_system
+
+# Test 5: Parameterized Rotation Gates
+echo "=== Test 5: Rotation Gates ==="
+create register rotation_test 1
+create circuit rotation_circuit 1
+
+# Apply U gate with specific parameters
+# U(π/4, π/2, 3π/4) - quarter turn rotations
+add gate rotation_circuit U(0.785398,1.570796,2.356194) 0
+execute rotation_circuit rotation_test
+probabilities rotation_test
+
+# Test 6: Grover Search Algorithm
+echo "=== Test 6: Grover Search ==="
+# Search for item 5 in database of size 9
+grover 9 5
+
+# Search for item 2 in database of size 27
+grover 27 2
+
+# Test 7: System Status and Cleanup
+echo "=== Test 7: System Information ==="
+status
+list registers
+list circuits
+history
+
+exit 

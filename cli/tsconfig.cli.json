@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "outDir": "./dist/commands",
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false
+  },
+  "include": [
+    "src/commands/encode-glyphs.ts",
+    "src/commands/decode-glyphs.ts",
+    "src/commands/asm.ts"
+  ]
+} 

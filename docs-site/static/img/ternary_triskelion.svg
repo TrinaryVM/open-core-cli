@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <style>
+    :root { --stroke: #9e9e9e; --dot: #cfcfcf; }
+    @media (prefers-color-scheme: light) { :root { --stroke: #4a4a4a; --dot: #6b6b6b; } }
+    @keyframes rotateSlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .arm { stroke: var(--stroke); stroke-width: 3.2; stroke-linecap: round; fill: none; }
+    .group { transform-origin: 100px 100px; animation: rotateSlow 26s linear infinite; }
+  </style>
+  <g class="group" transform="translate(100,100)">
+    <!-- Smooth logarithmic-like spiral arms (cubic Bézier approximations) -->
+    <path class="arm" d="M0 0 C -4 -10, -14 -16, -26 -14 C -38 -12, -46 -2, -44 10 C -42 22, -32 30, -20 30 C -10 30, -2 24, 2 16 C 6 8, 6 4, 0 0" />
+    <path class="arm" d="M0 0 C -4 -10, -14 -16, -26 -14 C -38 -12, -46 -2, -44 10 C -42 22, -32 30, -20 30 C -10 30, -2 24, 2 16 C 6 8, 6 4, 0 0" transform="rotate(120)" />
+    <path class="arm" d="M0 0 C -4 -10, -14 -16, -26 -14 C -38 -12, -46 -2, -44 10 C -42 22, -32 30, -20 30 C -10 30, -2 24, 2 16 C 6 8, 6 4, 0 0" transform="rotate(240)" />
+    <circle cx="0" cy="0" r="4.5" fill="var(--dot)" />
+  </g>
+</svg>

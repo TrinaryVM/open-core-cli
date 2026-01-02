@@ -1,0 +1,32 @@
+// TritLang Ternary Logic Example
+// Demonstrates balanced ternary logic operations
+
+contract TernaryLogic {
+    trit3 a;  // True state (+1)
+    trit3 b;  // Null state (0)
+    trit3 c;  // False state (-1)
+    
+    function main() public {
+        // Initialize ternary states
+        a = 1;    // Yang (positive)
+        b = 0;    // Xuan (neutral)
+        c = -1;   // Yin (negative)
+        
+        // Ternary AND operations
+        trit3 and_result = a & b;  // 1 & 0 = 0
+        
+        // Ternary OR operations
+        trit3 or_result = a | c;   // 1 | -1 = 1
+        
+        // Ternary XOR operations
+        trit3 xor_result = b ^ c;  // 0 ^ -1 = -1
+        
+        // Ternary NOT operation
+        trit3 not_result = ~a;     // ~1 = -1
+        
+        // Emit results for verification
+        emit TernaryResults(and_result, or_result, xor_result, not_result);
+    }
+    
+    event TernaryResults(trit3 and_val, trit3 or_val, trit3 xor_val, trit3 not_val);
+} 

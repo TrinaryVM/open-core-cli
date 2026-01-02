@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "lib": ["es2020", "esnext", "esnext.disposable"]
+  },
+  "include": [
+    "test/**/*"
+  ]
+} 

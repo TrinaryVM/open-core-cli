@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" style="background-color: #000000;">
+  <style>
+    @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 2px #b3b3b3); } 50% { filter: drop-shadow(0 0 6px #cccccc); } }
+    @keyframes seal { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .sierpinski { stroke: #a6a6a6; stroke-width: 1.5; fill: none; }
+    .sub-triangle { stroke: #b3b3b3; stroke-width: 2; fill: #1a1a1a; animation: glow 2s ease-in-out infinite; }
+    .top { animation-delay: 0s; }
+    .left { animation-delay: 1s; }
+    .right { animation-delay: 2s; }
+    .lock { fill: #333333; stroke: #b3b3b3; stroke-width: 1.5; animation: seal 2s ease-in-out infinite; transform-origin: center; }
+    .label { fill: #d9d9d9; font-size: 9px; font-family: 'Inter', sans-serif; }
+  </style>
+  <!-- Large outer (shield-like taper at bottom) -->
+  <polygon class="sierpinski" points="100,20 20,160 180,160"/>
+  <!-- Sub-triangle 1: Top -->
+  <polygon class="sub-triangle top" points="100,20 60,90 140,90"/>
+  <!-- Sub-triangle 2: Bottom-left -->
+  <polygon class="sub-triangle left" points="20,160 60,90 40,125"/>
+  <!-- Sub-triangle 3: Bottom-right -->
+  <polygon class="sub-triangle right" points="180,160 140,90 160,125"/>
+  <!-- Central lock across middle -->
+  <g class="lock" transform="translate(100,100)">
+    <rect x="-5" y="-8" width="10" height="16" rx="2"/>
+    <circle cx="0" cy="-3" r="2.5" fill="#1a1a1a"/>
+    <rect x="-1.5" y="6" width="3" height="4" rx="1"/>
+  </g>
+  <text class="label" x="100" y="185" text-anchor="middle">TriFHE Secure</text>
+</svg>

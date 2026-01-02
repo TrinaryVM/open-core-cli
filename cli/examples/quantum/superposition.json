@@ -1,0 +1,21 @@
+{
+  "name": "Ternary Superposition Circuit",
+  "description": "Creates equal superposition of all three states using Hadamard gate",
+  "gates": [
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Ternary Hadamard gate creates superposition"
+    }
+  ],
+  "measurements": [0],
+  "shots": 1000,
+  "expected_result": {
+    "description": "Equal probability (33.33%) for each state |0⟩, |1⟩, |2⟩",
+    "probabilities": {
+      "|0⟩": 0.333,
+      "|1⟩": 0.333,
+      "|2⟩": 0.333
+    }
+  }
+}

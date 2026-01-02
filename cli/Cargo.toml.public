@@ -1,0 +1,27 @@
+[package]
+name = "trinaryvm-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Public CLI dependencies only - no runtime dependency
+clap = { version = "4.0", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+hex = "0.4"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+num-bigint = "0.4"
+num-traits = "0.2"
+num-integer = "0.1"
+crossterm = "0.26"
+
+[[bin]]
+name = "trinaryvm"
+path = "src/main.rs"
+
+[features]
+dev = []
+# Note: Runtime-dependent features removed for public release
+# Users will use pre-compiled binaries for VM execution
+

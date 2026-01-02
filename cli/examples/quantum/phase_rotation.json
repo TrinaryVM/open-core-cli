@@ -1,0 +1,27 @@
+{
+  "name": "Ternary Phase Rotation Circuit",
+  "description": "Demonstrates phase rotations using S and T gates",
+  "gates": [
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Create superposition"
+    },
+    {
+      "name": "S",
+      "target": 0,
+      "description": "Apply S gate (π/2 phase rotation)"
+    },
+    {
+      "name": "T",
+      "target": 0,
+      "description": "Apply T gate (π/3 phase rotation)"
+    }
+  ],
+  "measurements": [0],
+  "shots": 1000,
+  "expected_result": {
+    "description": "Phase-rotated superposition with complex amplitudes",
+    "note": "Phase rotations affect the relative phases between states"
+  }
+}

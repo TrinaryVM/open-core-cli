@@ -1,0 +1,15 @@
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 8px #ffaa00);">
+  <style>
+    .outline{stroke:#ffaa00;stroke-width:2;fill:none}
+    .bar{fill:#ffaa00;transform-origin: 50% 100%;}
+    @keyframes bounceH{0%{transform:scaleY(1)}50%{transform:scaleY(.4)}100%{transform:scaleY(1)}}
+    .b1{animation:bounceH 1.8s ease-in-out infinite}
+    .b2{animation:bounceH 1.8s ease-in-out infinite .3s}
+    .b3{animation:bounceH 1.8s ease-in-out infinite .6s}
+  </style>
+  <polygon class="outline" points="75,10 10,140 140,140"/>
+  <!-- bars animate using CSS transforms for SVGR compatibility -->
+  <rect class="bar b1" x="40" y="70" width="15" height="50"/>
+  <rect class="bar b2" x="65" y="70" width="15" height="50"/>
+  <rect class="bar b3" x="90" y="70" width="15" height="50"/>
+</svg>

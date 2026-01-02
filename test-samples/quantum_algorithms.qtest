@@ -1,0 +1,211 @@
+# Advanced Quantum Algorithms Test Suite
+# TrinaryVM Quantum Interface - Advanced Testing
+# Run with: ./target/debug/quantum_terminal < quantum_algorithms.qtest
+
+# Algorithm 1: Quantum Teleportation Protocol
+echo "=== Algorithm 1: Quantum Teleportation Protocol ==="
+
+# Create the three-qutrit system for teleportation
+create register alice_qutrit 1
+create register bell_pair 2
+create register bob_qutrit 1
+
+# Step 1: Prepare unknown state |ψ⟩ on Alice's qutrit
+create circuit prepare_state 1
+add gate prepare_state H 0
+add gate prepare_state U(0.5,1.0,1.5) 0
+execute prepare_state alice_qutrit
+echo "Alice's unknown state prepared:"
+probabilities alice_qutrit
+
+# Step 2: Create Bell pair (entangled state)
+create circuit bell_circuit 2
+add gate bell_circuit H 0
+add gate bell_circuit CX 0 1
+execute bell_circuit bell_pair
+echo "Bell pair created:"
+probabilities bell_pair
+
+# Step 3: Bell measurement on Alice's qutrit + Bell pair[0]
+# (Simplified - real teleportation requires joint measurement)
+create register alice_measurement 2
+create circuit joint_measure 2
+add gate joint_measure CX 0 1
+add gate joint_measure H 0
+echo "Joint measurement circuit created"
+
+# Algorithm 2: Quantum Fourier Transform (3-qutrit)
+echo "=== Algorithm 2: Quantum Fourier Transform ==="
+
+create register qft_register 3
+create circuit qft_circuit 3
+
+# QFT implementation for 3 qutrits
+# H gates on all qutrits
+add gate qft_circuit H 0
+add gate qft_circuit H 1
+add gate qft_circuit H 2
+
+# Controlled phase rotations
+# CR(π/3) between adjacent qutrits
+add gate qft_circuit CZ 0 1
+add gate qft_circuit CZ 1 2
+
+# Final Hadamards
+add gate qft_circuit H 0
+add gate qft_circuit H 1
+
+execute qft_circuit qft_register
+echo "QFT applied to 3-qutrit system:"
+probabilities qft_register
+
+# Algorithm 3: Quantum Phase Estimation
+echo "=== Algorithm 3: Quantum Phase Estimation ==="
+
+create register phase_register 2
+create register eigenstate 1
+
+# Prepare eigenstate
+create circuit eigen_prep 1
+add gate eigen_prep H 0
+execute eigen_prep eigenstate
+
+# Phase estimation circuit
+create circuit phase_circuit 2
+add gate phase_circuit H 0
+add gate phase_circuit H 1
+
+# Controlled unitary applications
+add gate phase_circuit CZ 0 1
+add gate phase_circuit U(1.047197,0,0) 1  # Phase = π/3
+
+execute phase_circuit phase_register
+echo "Phase estimation circuit executed:"
+probabilities phase_register
+
+# Algorithm 4: Quantum Error Correction (3-qutrit code)
+echo "=== Algorithm 4: Quantum Error Correction ==="
+
+create register data_qutrit 1
+create register ancilla_qutrits 2
+create register full_system 3
+
+# Encode logical qutrit into 3 physical qutrits
+create circuit encoding_circuit 3
+add gate encoding_circuit H 0
+add gate encoding_circuit CX 0 1
+add gate encoding_circuit CX 0 2
+execute encoding_circuit full_system
+echo "Logical qutrit encoded:"
+probabilities full_system
+
+# Introduce error on second qutrit
+create circuit error_circuit 3
+add gate error_circuit X 1  # Bit flip error
+execute error_circuit full_system
+echo "Error introduced:"
+probabilities full_system
+
+# Error detection circuit
+create circuit detect_circuit 3
+add gate detect_circuit CX 0 1
+add gate detect_circuit CX 0 2
+execute detect_circuit full_system
+echo "Error detection applied:"
+probabilities full_system
+
+# Algorithm 5: Variational Quantum Eigensolver (VQE) Ansatz
+echo "=== Algorithm 5: VQE Ansatz Circuit ==="
+
+create register vqe_system 2
+create circuit vqe_ansatz 2
+
+# Parameterized ansatz circuit
+add gate vqe_ansatz H 0
+add gate vqe_ansatz H 1
+add gate vqe_ansatz U(1.2,0.8,0.4) 0
+add gate vqe_ansatz U(0.6,1.4,0.2) 1
+add gate vqe_ansatz CX 0 1
+add gate vqe_ansatz U(0.3,0.9,1.1) 0
+add gate vqe_ansatz U(1.8,0.1,0.7) 1
+
+execute vqe_ansatz vqe_system
+echo "VQE ansatz circuit executed:"
+probabilities vqe_system
+
+# Algorithm 6: Quantum Walk Simulation
+echo "=== Algorithm 6: Quantum Walk Simulation ==="
+
+create register walker_position 2
+create register walker_coin 1
+
+# Initialize coin in superposition
+create circuit coin_flip 1
+add gate coin_flip H 0
+execute coin_flip walker_coin
+
+# Position-dependent coin operations (simplified)
+create circuit walk_step 3
+add gate walk_step H 0  # Coin operation
+add gate walk_step CX 0 1  # Conditional move
+add gate walk_step CX 0 2  # Conditional move
+
+# Multiple walk steps
+create register walk_system 3
+execute walk_step walk_system
+execute walk_step walk_system
+execute walk_step walk_system
+
+echo "Quantum walk after 3 steps:"
+probabilities walk_system
+
+# Algorithm 7: Quantum Supremacy Circuit (Random Circuit)
+echo "=== Algorithm 7: Random Quantum Circuit ==="
+
+create register supremacy_test 4
+create circuit random_circuit 4
+
+# Layer 1: All Hadamards
+add gate random_circuit H 0
+add gate random_circuit H 1
+add gate random_circuit H 2
+add gate random_circuit H 3
+
+# Layer 2: Random rotations
+add gate random_circuit U(0.123,0.456,0.789) 0
+add gate random_circuit U(1.234,2.345,3.456) 1
+add gate random_circuit U(0.987,1.876,2.765) 2
+add gate random_circuit U(0.654,1.543,2.432) 3
+
+# Layer 3: Entangling gates
+add gate random_circuit CX 0 1
+add gate random_circuit CX 2 3
+add gate random_circuit CZ 1 2
+
+# Layer 4: More rotations
+add gate random_circuit U(2.718,1.414,0.577) 0
+add gate random_circuit U(3.141,2.718,1.618) 1
+add gate random_circuit U(1.732,1.414,2.236) 2
+add gate random_circuit U(0.693,1.099,1.386) 3
+
+execute random_circuit supremacy_test
+echo "Random quantum circuit executed (quantum supremacy test):"
+probabilities supremacy_test
+
+# Performance Testing
+echo "=== Performance Testing ==="
+
+# Test multiple Grover searches
+echo "Testing Grover performance with different database sizes:"
+grover 3 1
+grover 9 4
+grover 27 13
+grover 81 42
+
+# System resource usage
+status
+list registers
+list circuits
+
+echo "=== Advanced Quantum Algorithms Testing Complete ==="
+exit 

@@ -1,0 +1,6 @@
+contract Demo {
+    function main {
+        const4 80 pushout;
+        const4 0 pushout;
+    }
+}

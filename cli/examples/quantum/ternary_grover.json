@@ -1,0 +1,42 @@
+{
+  "name": "Ternary Grover Search Algorithm",
+  "description": "Simplified Grover search for ternary quantum systems",
+  "gates": [
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Initialize superposition"
+    },
+    {
+      "name": "H",
+      "target": 1,
+      "description": "Initialize second qutrit"
+    },
+    {
+      "name": "X",
+      "target": 0,
+      "description": "Oracle: mark target state"
+    },
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Diffusion operator"
+    },
+    {
+      "name": "X",
+      "target": 0,
+      "description": "Invert all states"
+    },
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Complete diffusion"
+    }
+  ],
+  "measurements": [0, 1],
+  "shots": 1000,
+  "expected_result": {
+    "description": "Grover algorithm amplifies target state probability",
+    "note": "This is a simplified version for demonstration"
+  }
+}

@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+target/
+Cargo.lock
+
+# Build outputs
+out/
+dist/
+build/
+
+# Test keys (too large)
+*.key
+cli/test_keys/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Proprietary documentation
+docs/

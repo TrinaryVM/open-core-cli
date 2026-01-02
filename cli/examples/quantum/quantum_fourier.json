@@ -1,0 +1,42 @@
+{
+  "name": "Ternary Quantum Fourier Transform",
+  "description": "Quantum Fourier Transform for ternary quantum systems",
+  "gates": [
+    {
+      "name": "H",
+      "target": 0,
+      "description": "First step of QFT"
+    },
+    {
+      "name": "S",
+      "target": 1,
+      "description": "Phase gate for QFT"
+    },
+    {
+      "name": "T",
+      "target": 2,
+      "description": "T gate for QFT"
+    },
+    {
+      "name": "H",
+      "target": 1,
+      "description": "Second step of QFT"
+    },
+    {
+      "name": "S",
+      "target": 2,
+      "description": "Phase gate for QFT"
+    },
+    {
+      "name": "H",
+      "target": 2,
+      "description": "Final step of QFT"
+    }
+  ],
+  "measurements": [0, 1, 2],
+  "shots": 1000,
+  "expected_result": {
+    "description": "QFT transforms computational basis to Fourier basis",
+    "note": "This is a simplified 3-qutrit QFT implementation"
+  }
+}

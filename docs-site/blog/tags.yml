@@ -1,0 +1,34 @@
+trifhe:
+  label: TriFHE
+  permalink: /tags/trifhe
+  description: Endpoint protection and homomorphic encryption
+
+vliw:
+  label: VLIW
+  permalink: /tags/vliw
+  description: Very Long Instruction Word scheduling and telemetry
+
+trinary-logic:
+  label: Trinary Logic
+  permalink: /tags/trinary-logic
+  description: Ternary computation and Tai Xuan tetragrams
+
+roadmap:
+  label: Roadmap
+  permalink: /tags/roadmap
+  description: Release plans and priorities
+
+hardware-acceleration:
+  label: Hardware Acceleration
+  permalink: /tags/hardware-acceleration
+  description: CUDA, FPGA, and ASIC acceleration tracks
+
+cli:
+  label: CLI
+  permalink: /tags/cli
+  description: TrinaryVM command-line tooling and workflows
+
+security:
+  label: Security
+  permalink: /tags/security
+  description: Zero-trust, endpoint protection, and applied cryptography

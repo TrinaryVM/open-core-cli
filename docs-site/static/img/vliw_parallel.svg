@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <style>
+    :root { --fg: #b3b3b3; --chip: #333333; --chipEdge: #a6a6a6; --text: #d9d9d9; }
+    @media (prefers-color-scheme: light) { :root { --fg: #4a4a4a; --chip: #eaeaea; --chipEdge: #888888; --text: #333333; } }
+    @keyframes dash { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+    .arrow { stroke: var(--fg); stroke-width: 3; fill: none; stroke-dasharray: 100; animation: dash 2s linear infinite; }
+    .chip { fill: var(--chip); stroke: var(--chipEdge); stroke-width: 2; }
+    .label { fill: var(--text); font-size: 10px; font-family: sans-serif; }
+  </style>
+  <rect class="chip" x="140" y="80" width="40" height="40" rx="5"/>
+  <path class="arrow" d="M20,60 L140,90" style="animation-delay: 0s;"/>
+  <polygon points="140,90 135,85 135,95" fill="var(--fg)"/>
+  <path class="arrow" d="M20,100 L140,100" style="animation-delay: 0.5s;"/>
+  <polygon points="140,100 135,95 135,105" fill="var(--fg)"/>
+  <path class="arrow" d="M20,140 L140,110" style="animation-delay: 1s;"/>
+  <polygon points="140,110 135,105 135,115" fill="var(--fg)"/>
+  <text class="label" x="10" y="55">Instr 1</text>
+  <text class="label" x="10" y="95">Instr 2</text>
+  <text class="label" x="10" y="135">Instr 3</text>
+  <text class="label" x="145" y="100">VLIW</text>
+</svg>

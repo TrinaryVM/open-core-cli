@@ -1,0 +1,8 @@
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 8px #00ffaa);">
+  <polygon points="75,10 10,140 140,140" 
+           stroke="#00ffaa" stroke-width="2" fill="none"/>
+  <circle id="state" cx="75" cy="20" r="6" fill="#00ffaa">
+    <animate attributeName="cx" values="75;20;130;75" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="20;135;135;20" dur="4s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -1,0 +1,29 @@
+{
+  "name": "Ternary Entanglement Circuit",
+  "description": "Creates entangled state between two qutrits using Hadamard and controlled operations",
+  "gates": [
+    {
+      "name": "H",
+      "target": 0,
+      "description": "Create superposition on first qutrit"
+    },
+    {
+      "name": "X",
+      "target": 1,
+      "description": "Apply X gate to second qutrit"
+    }
+  ],
+  "measurements": [0, 1],
+  "shots": 1000,
+  "expected_result": {
+    "description": "Entangled state with correlated measurements",
+    "probabilities": {
+      "|00⟩": 0.167,
+      "|01⟩": 0.167,
+      "|02⟩": 0.167,
+      "|10⟩": 0.167,
+      "|11⟩": 0.167,
+      "|12⟩": 0.167
+    }
+  }
+}

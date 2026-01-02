@@ -1,0 +1,277 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Dark Metallic Palette - Aligned with logo's metallic aesthetic */
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #d9d9d9;
+  --text-secondary: #a6a6a6;
+  --accent-primary: #b3b3b3;
+  --accent-hover: #cccccc;
+  --border-color: #333333;
+  --tip-bg: #262626;
+  --tip-text: #b3b3b3;
+  --shadow: rgba(0, 0, 0, 0.5);
+
+  /* Map to Infima variables */
+  --ifm-color-primary: var(--accent-primary);
+  --ifm-color-primary-dark: #9e9e9e;
+  --ifm-color-primary-darker: #8c8c8c;
+  --ifm-color-primary-darkest: #7a7a7a;
+  --ifm-color-primary-light: #c2c2c2;
+  --ifm-color-primary-lighter: #d1d1d1;
+  --ifm-color-primary-lightest: #e0e0e0;
+  --ifm-background-color: var(--bg-primary);
+  --ifm-background-surface-color: var(--bg-secondary);
+  --ifm-color-content: var(--text-primary);
+  --ifm-heading-color: var(--accent-primary);
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
+
+  /* Typography - Metallic Theme Font Stack */
+  --font-primary: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: var(--accent-primary);
+  --ifm-background-color: var(--bg-primary);
+  --ifm-background-surface-color: var(--bg-secondary);
+  --ifm-color-content: var(--text-primary);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Base */
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--accent-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h1 { 
+  font-size: 2.5rem; 
+  font-weight: 700;
+}
+h2 { 
+  font-size: 2rem; 
+  font-weight: 600;
+}
+h3 { 
+  font-size: 1.5rem; 
+  font-weight: 600;
+}
+
+/* Code typography */
+code, pre, .theme-code-block {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Enhanced typography for metallic branding */
+.hero__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.hero__subtitle {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* Layout helpers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.sidebar {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.main-content { padding: 2rem; }
+
+/* Header/Nav */
+.navbar {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar__brand .navbar__logo {
+  filter: brightness(1.2) grayscale(0.4);
+}
+
+/* Navbar logo - move up to align with text */
+.navbar .navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar .navbar__brand img,
+.navbar .navbar__brand .navLogo,
+.navbar .navbar__brand img[class*="themedComponent"] {
+  border-radius: 50% !important;
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: cover !important;
+  overflow: hidden !important;
+  display: inline-block;
+  filter: brightness(1.2) grayscale(0.4);
+  transition: all 0.3s ease;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-5px);
+  animation: logoRotate 3s linear infinite;
+}
+
+@keyframes logoRotate {
+  from {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  to {
+    transform: translateY(-5px) rotate(360deg);
+  }
+}
+
+.navbar .navbar__brand img:hover {
+  filter: brightness(1.4) grayscale(0.2);
+}
+
+.navbar__link {
+  color: var(--accent-primary);
+}
+.navbar__link:hover { color: var(--accent-hover); }
+
+/* Sidebar menu */
+.menu__link { color: var(--text-secondary); }
+.menu__link:hover { color: var(--accent-primary); }
+.menu__list-item:not(:last-child) { border-bottom: 1px solid var(--border-color); }
+
+/* Blog/Docs content */
+.post-title, .markdown h1, .markdown h2, .markdown h3 { color: var(--accent-primary); }
+.post-meta { color: var(--text-secondary); }
+.markdown { color: var(--text-primary); }
+
+/* Tags with accent colors */
+.tag { 
+  background-color: var(--bg-secondary); 
+  color: var(--accent-primary); 
+  border-radius: 20px; 
+  border: 1px solid var(--border-color);
+}
+.tag:hover { 
+  background-color: var(--border-color); 
+  border-color: var(--accent-primary);
+}
+
+/* Tag variants for different content types */
+.tag--security { 
+  background-color: var(--bg-secondary); 
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+.tag--hardware { 
+  background-color: var(--bg-secondary); 
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+.tag--vliw { 
+  background-color: var(--bg-secondary); 
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Tip/Admonitions */
+.alert--success, .alert--info, .alert--secondary {
+  background-color: var(--tip-bg);
+  color: var(--tip-text);
+  border-color: var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Links & Buttons */
+a { color: var(--accent-primary); transition: color .3s ease; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+.button { background: var(--bg-secondary); color: var(--accent-primary); border: 1px solid var(--border-color); }
+.button:hover { background: var(--border-color); }
+
+/* Code blocks */
+.theme-code-block, pre, code { background: var(--bg-secondary); color: var(--text-primary); }
+
+/* Footer */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+.footer .footer__title {
+  color: var(--accent-primary);
+}
+.footer .footer__link-item {
+  color: var(--text-secondary);
+}
+.footer .footer__link-item:hover {
+  color: var(--accent-primary);
+}
+.footer__copyright {
+  color: var(--text-secondary);
+}
+
+/* Explicit light theme overrides */
+[data-theme='light'] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --accent-primary: #333333;
+  --accent-hover: #000000;
+  --border-color: #dee2e6;
+  --tip-bg: #f8f9fa;
+  --tip-text: #495057;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Map to Infima in light mode */
+  --ifm-color-primary: var(--accent-primary);
+  --ifm-background-color: var(--bg-primary);
+  --ifm-background-surface-color: var(--bg-secondary);
+  --ifm-color-content: var(--text-primary);
+  
+  /* Light theme typography adjustments */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--accent-primary);
+    text-shadow: none;
+  }
+  
+  .hero__title {
+    text-shadow: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar { border-right: none; border-bottom: 1px solid var(--border-color); }
+  .container { padding: 1rem; }
+}

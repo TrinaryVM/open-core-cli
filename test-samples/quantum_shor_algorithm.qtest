@@ -1,0 +1,123 @@
+# Shor's Algorithm for Ternary Factorization
+# TrinaryVM Quantum Interface - Advanced Cryptographic Algorithm
+# Run with: ./target/debug/quantum_terminal < quantum_shor_algorithm.qtest
+
+# Shor's Algorithm: Factor N = 15 (base-10) = 120 (base-3)
+# Target: Find factors of 15 using quantum period finding
+
+# Phase 1: Quantum Period Finding Setup
+create register control_qubits 4    # Control register for superposition
+create register target_register 4   # Target register for modular exponentiation
+create register workspace 2         # Additional workspace
+
+# Initialize control register in superposition
+create circuit superposition_prep 4
+add gate superposition_prep H 0
+add gate superposition_prep H 1
+add gate superposition_prep H 2
+add gate superposition_prep H 3
+
+execute superposition_prep control_qubits
+probabilities control_qubits
+
+# Phase 2: Controlled Modular Exponentiation (simplified)
+# In real Shor's algorithm: |x⟩|y⟩ → |x⟩|y⊕f(x)⟩ where f(x) = a^x mod N
+create circuit modular_exp 8
+create register full_system 8
+
+# Controlled operations (simplified representation)
+add gate modular_exp CX 0 4    # Control-target entanglement
+add gate modular_exp CX 1 5
+add gate modular_exp CZ 2 6
+add gate modular_exp CX 3 7
+
+# Add phase rotations for period detection
+add gate modular_exp U(0.785398,0,0) 4  # π/4 rotation
+add gate modular_exp U(1.570796,0,0) 5  # π/2 rotation
+add gate modular_exp U(2.356194,0,0) 6  # 3π/4 rotation
+add gate modular_exp U(3.141593,0,0) 7  # π rotation
+
+execute modular_exp full_system
+probabilities full_system
+
+# Phase 3: Quantum Fourier Transform (Inverse)
+create register qft_input 4
+create circuit inverse_qft 4
+
+# Inverse QFT implementation for period extraction
+add gate inverse_qft H 3
+add gate inverse_qft H 2
+add gate inverse_qft H 1
+add gate inverse_qft H 0
+
+# Controlled phase gates (inverse)
+add gate inverse_qft CZ 0 1
+add gate inverse_qft CZ 1 2
+add gate inverse_qft CZ 2 3
+
+# Additional phase corrections
+add gate inverse_qft U(-0.785398,0,0) 0
+add gate inverse_qft U(-1.570796,0,0) 1
+
+execute inverse_qft qft_input
+probabilities qft_input
+
+# Phase 4: Period Detection through Measurement
+measure qft_input 0
+measure qft_input 1
+probabilities qft_input
+
+# Phase 5: Classical Post-Processing Simulation
+# (In real implementation, this would be done classically)
+# Find period r, then compute gcd(a^(r/2) ± 1, N)
+
+# Advanced Optimization: Quantum Error Correction for Shor's
+create register logical_qubit 9     # 3x3 error correction
+create circuit shor_ecc 9
+
+# Surface code implementation (simplified)
+add gate shor_ecc H 0
+add gate shor_ecc H 1
+add gate shor_ecc H 2
+
+# Error correction syndrome detection
+add gate shor_ecc CX 0 3
+add gate shor_ecc CX 1 4
+add gate shor_ecc CX 2 5
+add gate shor_ecc CZ 3 6
+add gate shor_ecc CZ 4 7
+add gate shor_ecc CZ 5 8
+
+execute shor_ecc logical_qubit
+probabilities logical_qubit
+
+# Performance Analysis
+status
+grover 243 121    # Compare with Grover for equivalent search space
+
+# Advanced Test: Factorization of larger numbers
+# Factor N = 21 (base-10) = 210 (base-3)
+create register large_factorization 6
+create circuit large_shor 6
+
+add gate large_shor H 0
+add gate large_shor H 1
+add gate large_shor H 2
+
+# More complex modular arithmetic
+add gate large_shor CX 0 3
+add gate large_shor CX 1 4
+add gate large_shor CX 2 5
+
+# Advanced phase estimation
+add gate large_shor U(0.523599,0,0) 3   # π/6
+add gate large_shor U(1.047198,0,0) 4   # π/3
+add gate large_shor U(1.570796,0,0) 5   # π/2
+
+execute large_shor large_factorization
+probabilities large_factorization
+
+measure large_factorization
+status
+
+exit 
